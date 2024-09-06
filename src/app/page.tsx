@@ -1,7 +1,16 @@
+import { HeroSection } from '@/components/mainPage/hero-section';
+
 export default function Home() {
   return (
-    <main className="bg-[url('/assets/images/hero.jpg')] h-screen bg-cover bg-center">
-      <div className="containerCustom">{/* <h1>ola</h1> */}</div>
+    <main>
+      <div className="overflow-hidden overflow-x-hidden">
+        <HeroSection />
+      </div>
+      <h2>fdgfbsfg</h2>
+      <h2>fdgfbsfg</h2>
+      <h2>fdgfbsfg</h2>
+      <h2>fdgfbsfg</h2>
+      <h2>fdgfbsfg</h2>
     </main>
   );
 }

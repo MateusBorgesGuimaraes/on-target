@@ -76,13 +76,11 @@ export const Header = () => {
                   <Link href={'/'}>headset</Link>
                 </li>
                 <li className="w-full">
-                  <button className="flex items-center justify-between text-white gap-1 bg-neon-red w-full py-2 px-4 rounded-md text-xl hover:bg-neon-red/70 duration-300">
+                  <button className="flex items-center justify-center text-white gap-1 bg-neon-red w-full py-2 px-4 rounded-md text-xl hover:bg-neon-red/70 duration-300">
                     <span className="flex items-center gap-2">
                       <ShoppingBag height={24} width={24} />{' '}
                       <p className="font-bold">0</p>
-                    </span>
-                    <span className="flex items-center gap-2 text-base font-normal">
-                      abrir carrinho <ExternalLink height={24} width={24} />
+                      | abrir carrinho <ExternalLink height={24} width={24} />
                     </span>
                   </button>
                 </li>
