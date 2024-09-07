@@ -3,13 +3,13 @@ import { LinkButton } from '../link-button';
 
 export const HeroSection = () => {
   return (
-    <section className="bg-[url('/assets/images/hero.jpg')] h-screen bg-cover bg-center">
+    <section className="bg-[url('/assets/images/hero.jpg')] h-screen bg-cover bg-center overflow-hidden overflow-x-hidden">
       <div className="containerCustom flex pt-28 items-center justify-center h-full w-full lg:flex-row flex-col">
         <ColorBallsDec
           color="neon-red"
           className="absolute xl:top-24 top-36 left-1/3 -translate-x-1/2 xl:w-40 xl:h-40 w-28 h-28 lg:block hidden"
         />
-        <div className="font-bebas sm:text-[128px] smallest:text-8xl text-[5rem] self-center justify-self-center">
+        <div className="font-bebas sm:text-9xl smallest:text-8xl text-[5rem] self-center justify-self-center">
           <h1 className="leading-tight">
             <span>Qualidade,</span>
             <br />

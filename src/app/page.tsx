@@ -1,16 +1,11 @@
 import { HeroSection } from '@/components/mainPage/hero-section';
+import { Recommendations } from '@/components/mainPage/recommendations';
 
 export default function Home() {
   return (
     <main>
-      <div className="overflow-hidden overflow-x-hidden">
-        <HeroSection />
-      </div>
-      <h2>fdgfbsfg</h2>
-      <h2>fdgfbsfg</h2>
-      <h2>fdgfbsfg</h2>
-      <h2>fdgfbsfg</h2>
-      <h2>fdgfbsfg</h2>
+      <HeroSection />
+      <Recommendations />
     </main>
   );
 }
