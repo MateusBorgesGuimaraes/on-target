@@ -21,13 +21,13 @@ export const HeroSection = () => {
 
         <ColorBallsDec
           color="neon-purple"
-          className="absolute bottom-1 left-1/5 xl:w-32 xl:h-32 w-24 h-24 lg:block hidden"
+          className="absolute bottom-1 left-[10%] xl:w-32 xl:h-32 w-24 h-24 lg:block hidden"
         />
 
         <div
           className="flex pr-4 flex-col gap-5 xl:max-w-[41.25rem] sm:max-w-[31.25rem] max-w-[21.25rem] w-full lg:ml-auto relative z-10 before:absolute xl:before:w-[50rem] xl:before:h-[50rem] before:w-[42rem] before:h-[42rem] before:bg-neon-purple-gray-500/60 before:rounded-full lg:before:block before:hidden before:z-[-10] xl:before:-top-44 
           before:-top-32
-          before:-right-14 before:overflow-x-hidden "
+          before:-right-14 before:overflow-x-hidden"
         >
           <p className="xl:text-2xl text-xl lg:flex hidden">
             Descubra a maior variedade de produtos de tecnologia do mercado

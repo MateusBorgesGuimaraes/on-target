@@ -3,7 +3,7 @@ import { ProductViewer } from '../product-viewer';
 
 export const Recommendations = () => {
   return (
-    <section className="bg-neon-purple-gray-500">
+    <section className="bg-neon-purple-gray-500 overflow-hidden overflow-x-hidden">
       <div className="containerCustom py-12 flex justify-center relative">
         <ColorBallsDec
           color="neon-red"
@@ -12,7 +12,7 @@ export const Recommendations = () => {
 
         <ColorBallsDec
           color="neon-purple"
-          className="w-32 h-32 absolute right-0 top-16 hidden xl:block"
+          className="w-32 h-32 absolute right-0 top-16 hidden xl:block z-20"
         />
         <ProductViewer />
       </div>
