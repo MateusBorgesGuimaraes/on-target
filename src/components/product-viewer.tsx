@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React from 'react';
 import { LinkButton } from './link-button';
 import { CirclePlus } from 'lucide-react';
+import { useChangeImages } from '@/hooks/useChangeImages';
 
 const testeArray = [
   {
@@ -46,14 +47,7 @@ const testeArray = [
 ];
 
 export const ProductViewer = () => {
-  const [selectedProduct, setSelectedProduct] = React.useState(1);
-  const [prod, setProd] = React.useState(testeArray[0]);
-
-  const changeProduct = (id: number) => {
-    setSelectedProduct(id);
-    const find = testeArray.find((product) => product.id === id);
-    if (find) setProd(find);
-  };
+  const { changeProduct, selectedProduct, prod } = useChangeImages(testeArray);
 
   return (
     <div className="max-w-max flex xl:flex-row flex-col sm:gap-14 gap-6 ">

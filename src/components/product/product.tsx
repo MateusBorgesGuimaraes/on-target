@@ -6,6 +6,7 @@ import { LinkButton } from '../link-button';
 import { CirclePlus } from 'lucide-react';
 import currency from '@/functions/currency';
 import { ColorBallsDec } from '../color-ball-dec';
+import { useChangeImages } from '@/hooks/useChangeImages';
 
 const testeArray = [
   {
@@ -38,14 +39,7 @@ const testeArray = [
 ];
 
 export const Product = () => {
-  const [selectedProduct, setSelectedProduct] = React.useState(1);
-  const [prod, setProd] = React.useState(testeArray[0]);
-
-  const changeProduct = (id: number) => {
-    setSelectedProduct(id);
-    const find = testeArray.find((product) => product.id === id);
-    if (find) setProd(find);
-  };
+  const { changeProduct, selectedProduct, prod } = useChangeImages(testeArray);
 
   return (
     <div className="flex lg:gap-32 gap-10 lg:flex-row flex-col">
