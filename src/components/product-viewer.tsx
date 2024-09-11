@@ -6,57 +6,23 @@ import React from 'react';
 import { LinkButton } from './link-button';
 import { CirclePlus } from 'lucide-react';
 import { useChangeImages } from '@/hooks/useChangeImages';
+import { Product } from '@/types';
 
-const testeArray = [
-  {
-    id: 1,
-    name: 'Fone h2k pro',
-    price: 200,
-    stock: 10,
-    description:
-      'Headset gamer com som surround, microfone destacável e almofadas confortáveis.',
-    img: '/assets/images/teste.jpg',
-  },
-  {
-    id: 2,
-    name: 'Fone h2k Sound',
-    price: 234,
-    stock: 13,
-    description:
-      'Headset gamer com som surround, microfone destacável e almofadas confortáveis.',
-    img: '/assets/images/teste2.jpg',
-  },
-  {
-    id: 3,
-    name: 'Fone h2k zion',
-    price: 277,
-    stock: 20,
-    description:
-      'Headset gamer com som surround, microfone destacável e almofadas confortáveis.',
-    img: '/assets/images/teste3.jpg',
-  },
-  {
-    id: 4,
-    name: 'Fone h2k Efecctive',
-    price: 566,
-    stock: 18,
-    description:
-      'Headset gamer com som surround, microfone destacável e almofadas confortáveis.',
-    img: '/assets/images/teste4.jpg',
-  },
-];
+type ProductViewerProps = {
+  products: Product[];
+};
 
-export const ProductViewer = () => {
-  const { changeProduct, selectedProduct, prod } = useChangeImages(testeArray);
+export const ProductViewer = ({ products }: ProductViewerProps) => {
+  const { changeProduct, selectedProduct, prod } = useChangeImages(products);
 
   return (
-    <div className="max-w-max flex xl:flex-row flex-col sm:gap-14 gap-6 ">
+    <div className="max-w-max flex xl:flex-row flex-col sm:gap-14 gap-6">
       <div className="flex flex-col justify-center items-center xl:block">
         <h1 className="md:text-9xl smallest:text-8xl text-[5rem] leading-tight text-neon-red font-bebas mb-4 break-all">
           RECOMENDAÇÕES
         </h1>
         <ul className="flex pb-8 max-w-[560px] justify-between flex-wrap gap-2 supersmall:flex-nowrap smallest:gap-5 xl:gap-0">
-          {testeArray.map((product) => (
+          {products.map((product) => (
             <li
               onClick={() => changeProduct(product.id)}
               key={product.id}
@@ -69,7 +35,7 @@ export const ProductViewer = () => {
                   ? 'border-neon-purple scale-110'
                   : 'border-neon-red scale-100'
               }`}
-                src={product.img}
+                src={`http://localhost:1337${product.img}`}
                 width={200}
                 height={200}
                 alt="teste"
@@ -80,7 +46,7 @@ export const ProductViewer = () => {
         <div>
           <Image
             className="supersmall:w-[35rem] supersmall:h-[25rem] w-[18.75rem] h-[13.375rem] object-cover"
-            src={prod.img}
+            src={`http://localhost:1337${prod.img}`}
             width={560}
             height={400}
             alt="teste"

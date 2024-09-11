@@ -1,7 +1,24 @@
+import { FullProduct, Product } from '@/types';
 import { Card } from '../card';
 import { ColorBallsDec } from '../color-ball-dec';
 
-export const Releases = () => {
+type RecommendationsProps = {
+  featuredProducts: FullProduct[];
+};
+
+export const Releases = ({ featuredProducts }: RecommendationsProps) => {
+  const filteredProducts = featuredProducts.map((product): Product => {
+    const mainImageUrl = product.mainImage?.large?.url || '';
+    return {
+      name: product.name,
+      price: product.price,
+      description: product.description,
+      stock: product.stock,
+      img: mainImageUrl,
+      id: product.id,
+    };
+  });
+
   return (
     <section className="bg-neon-purple-gray-600">
       <div className="containerCustom py-12">
@@ -18,14 +35,9 @@ export const Releases = () => {
         </div>
 
         <div className="pt-12 grid gap-10 grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {filteredProducts.map((prod) => (
+            <Card key={prod.id} product={prod} />
+          ))}
         </div>
       </div>
     </section>
