@@ -8,7 +8,12 @@ type RecommendationsProps = {
 
 export const Releases = ({ featuredProducts }: RecommendationsProps) => {
   const filteredProducts = featuredProducts.map((product): Product => {
-    const mainImageUrl = product.mainImage?.large?.url || '';
+    const mainImageUrl =
+      product.mainImage?.large?.url ||
+      product.mainImage?.medium?.url ||
+      product.mainImage?.small?.url ||
+      product.mainImage?.thumbnail?.url ||
+      '';
     return {
       name: product.name,
       price: product.price,

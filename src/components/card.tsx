@@ -33,7 +33,7 @@ export const Card = ({ product }: { product: Product }) => {
 
         <div className="flex mt-4 font-bebas text-xl leading-none justify-between gap-5">
           <Link
-            href={`/product/${product.id}}`}
+            href={`/product/${product.id}`}
             className="py-1 bg-neon-purple w-full hover:bg-neon-purple/80 duration-300 flex items-center justify-center"
           >
             VER MAIS

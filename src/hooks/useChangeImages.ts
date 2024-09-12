@@ -1,17 +1,21 @@
 'use client';
 
-import { Product } from '@/types';
 import React from 'react';
 
-export const useChangeImages = (produtos: Product[]) => {
-  const [selectedProduct, setSelectedProduct] = React.useState(produtos[0].id);
-  const [prod, setProd] = React.useState(produtos[0]);
+type Images = {
+  id: number;
+  image: string;
+};
 
-  const changeProduct = (id: number) => {
-    setSelectedProduct(id);
-    const find = produtos.find((product) => product.id === id);
-    if (find) setProd(find);
+export const useChangeImages = (images: Images[]) => {
+  const [selectedImage, setSelectedImage] = React.useState(images[0].id);
+  const [image, setImage] = React.useState(images[0]);
+
+  const changeImage = (id: number) => {
+    setSelectedImage(id);
+    const find = images.find((image) => image.id === id);
+    if (find) setImage(find);
   };
 
-  return { changeProduct, selectedProduct, prod };
+  return { changeImage, selectedImage, image };
 };

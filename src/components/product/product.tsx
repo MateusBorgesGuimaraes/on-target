@@ -7,61 +7,63 @@ import { CirclePlus } from 'lucide-react';
 import currency from '@/functions/currency';
 import { ColorBallsDec } from '../color-ball-dec';
 import { useChangeImages } from '@/hooks/useChangeImages';
+import { FullProduct } from '@/types';
 
-const testeArray = [
-  {
-    id: 1,
-    name: 'Fone h2k pro',
-    price: 200,
-    stock: 10,
-    description:
-      'Headset gamer com som surround, microfone destacável e almofadas confortáveis.',
-    img: '/assets/images/teste.jpg',
-  },
-  {
-    id: 2,
-    name: 'Fone h2k Sound',
-    price: 234,
-    stock: 13,
-    description:
-      'Headset gamer com som surround, microfone destacável e almofadas confortáveis.',
-    img: '/assets/images/teste2.jpg',
-  },
-  {
-    id: 3,
-    name: 'Fone h2k zion',
-    price: 277,
-    stock: 20,
-    description:
-      'Headset gamer com som surround, microfone destacável e almofadas confortáveis.',
-    img: '/assets/images/teste3.jpg',
-  },
-];
+type ProductProps = {
+  product: FullProduct;
+};
 
-export const Product = () => {
-  const { changeProduct, selectedProduct, prod } = useChangeImages(testeArray);
+export const Product = ({ product }: ProductProps) => {
+  const images = [
+    {
+      id: 1,
+      image:
+        product.mainImage?.large?.url ||
+        product.mainImage?.medium?.url ||
+        product.mainImage?.small?.url ||
+        product.mainImage?.thumbnail?.url ||
+        '',
+    },
+    {
+      id: 2,
+      image:
+        product.secondImage?.large?.url ||
+        product.secondImage?.medium?.url ||
+        product.secondImage?.small?.url ||
+        product.secondImage?.thumbnail?.url ||
+        '',
+    },
+    {
+      id: 3,
+      image:
+        product.thirdImage?.large?.url ||
+        product.thirdImage?.medium?.url ||
+        product.thirdImage?.small?.url ||
+        product.thirdImage?.thumbnail?.url ||
+        '',
+    },
+  ];
+  const { changeImage, selectedImage } = useChangeImages(images);
 
   return (
     <div className="flex lg:gap-32 gap-10 lg:flex-row flex-col">
       <div className="flex gap-4 supersmall:flex-row flex-col">
         <ul className="flex supersmall:flex-col flex-row gap-4">
-          {testeArray.map((product) => (
+          {images.map((img) => (
             <li
-              onClick={() => changeProduct(product.id)}
-              key={product.id}
+              onClick={() => changeImage(img.id)}
+              key={img.id}
               className="cursor-pointer group"
             >
               {
                 <Image
                   className={`w-[130px] supersmall:h-[130px] h-[100px] object-cover rounded-[8px] ${
-                    selectedProduct === product.id
-                      ? 'border-neon-red border-2'
-                      : ''
+                    selectedImage === img.id ? 'border-neon-red border-2' : ''
                   }`}
-                  src={product.img}
+                  src={`http://localhost:1337${img.image}`}
                   width={130}
                   height={130}
-                  alt={product.description}
+                  alt={product.description || 'teste'}
                 />
               }
             </li>
@@ -70,10 +72,12 @@ export const Product = () => {
         <div className="supersmall:h-[430px] h-[300px]">
           <Image
             className="h-full object-cover rounded-[8px]"
-            src={prod.img}
+            src={`http://localhost:1337${
+              product.mainImage?.large?.url || product.mainImage?.medium?.url
+            }`}
             width={440}
             height={430}
-            alt={prod.description}
+            alt={product.description || 'teste'}
           />
         </div>
       </div>
@@ -83,29 +87,29 @@ export const Product = () => {
           color="neon-red"
           className="w-[100px] h-[100px] absolute -top-36 right-0 hidden lg:block"
         />
-        <h2 className="sm:text-8xl font-bebas text-5xl">{prod.name}</h2>
+        <h2 className="sm:text-8xl font-bebas text-5xl">{product.name}</h2>
         <div className="mt-7 flex flex-col gap-7">
           <div className="flex justify-between items-center ">
             <p className="text-4xl font-bebas">PREÇO</p>
             <p className="text-xl text-neon-purple-gray-100">
-              {currency(prod.price)}
+              {currency(product.price)}
             </p>
           </div>
 
           <div className="flex justify-between items-center ">
             <p className="text-4xl font-bebas">STOCK</p>
-            <p className="text-xl text-neon-purple-gray-100">{prod.stock}</p>
+            <p className="text-xl text-neon-purple-gray-100">{product.stock}</p>
           </div>
 
           <div className="flex flex-col gap-2">
             <p className="text-4xl font-bebas">DESCRIÇÃO</p>
             <p className="text-xl text-neon-purple-gray-100 max-w-[600px]">
-              {prod.description}
+              {product.description}
             </p>
           </div>
 
           <div className="flex max-w-36 ">
-            <LinkButton color="red" href={`/product/${prod.id}`}>
+            <LinkButton color="red" href={`/product/${product.id}`}>
               <p className="flex items-center gap-2">
                 <CirclePlus /> ADD
               </p>

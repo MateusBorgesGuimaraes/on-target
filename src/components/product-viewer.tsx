@@ -5,15 +5,15 @@ import Image from 'next/image';
 import React from 'react';
 import { LinkButton } from './link-button';
 import { CirclePlus } from 'lucide-react';
-import { useChangeImages } from '@/hooks/useChangeImages';
 import { Product } from '@/types';
+import { useChangeProds } from '@/hooks/useChangeProds';
 
 type ProductViewerProps = {
   products: Product[];
 };
 
 export const ProductViewer = ({ products }: ProductViewerProps) => {
-  const { changeProduct, selectedProduct, prod } = useChangeImages(products);
+  const { changeProduct, selectedProduct, prod } = useChangeProds(products);
 
   return (
     <div className="max-w-max flex xl:flex-row flex-col sm:gap-14 gap-6">
