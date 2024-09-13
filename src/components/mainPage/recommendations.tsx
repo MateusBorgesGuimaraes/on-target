@@ -27,10 +27,10 @@ export const Recommendations = ({ featuredProducts }: RecommendationsProps) => {
   return (
     <section className="bg-neon-purple-gray-500 overflow-hidden overflow-x-hidden">
       <div className="containerCustom py-12 flex justify-center relative">
-        <ColorBallsDec
+        {/* <ColorBallsDec
           color="neon-red"
           className="w-32 h-32 absolute -left-32 top-[500px] hidden xl:block"
-        />
+        /> */}
 
         <ColorBallsDec
           color="neon-purple"

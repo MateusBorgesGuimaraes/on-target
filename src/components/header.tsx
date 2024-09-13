@@ -1,4 +1,4 @@
-import { ExternalLink, Menu, ShoppingBag } from 'lucide-react';
+import { Menu, ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -10,10 +10,20 @@ import {
   SheetTrigger,
 } from './ui/sheet';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
+import {
+  Dialog,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogContent,
+} from './ui/dialog';
+import { LoginForm } from './loginForm';
+import { RegisterForm } from './register-form';
 
 export const Header = () => {
   return (
-    <header className="containerCustom relative">
+    <header className="containerCustom relative z-20">
       <nav className="flex items-center justify-between pt-10 text-2xl ">
         <Link href={'/'}>
           <Image
@@ -41,10 +51,52 @@ export const Header = () => {
           </li>
         </ul>
 
-        <button className="lg:flex hidden items-center text-neon-red gap-1">
-          <ShoppingBag height={32} width={32} />{' '}
-          <p className="font-normal">0</p>
-        </button>
+        <div className="lg:flex hidden items-center gap-4">
+          <Dialog>
+            <DialogTrigger asChild>
+              <button className="font-bebas bg-neon-purple py-1 px-4 hover:bg-neon-purple/80 duration-300 rounded-sm">
+                entrar
+              </button>
+            </DialogTrigger>
+            <DialogContent className="bg-neon-purple-gray-300 border-none">
+              <DialogHeader>
+                <DialogTitle className="font-bebas text-6xl text-neon-red tracking-wide">
+                  LOGIN
+                </DialogTitle>
+                <DialogDescription>
+                  Entre ja na sua conta e comece a comprar com os melhores
+                  preços do mercado.
+                </DialogDescription>
+              </DialogHeader>
+              <LoginForm />
+            </DialogContent>
+          </Dialog>
+
+          <Dialog>
+            <DialogTrigger asChild>
+              <button className="font-bebas bg-neon-red py-1 px-4 hover:bg-neon-red/80 duration-300 rounded-sm">
+                registrar
+              </button>
+            </DialogTrigger>
+            <DialogContent className="bg-neon-purple-gray-300 border-none">
+              <DialogHeader>
+                <DialogTitle className="font-bebas text-6xl text-neon-red tracking-wide">
+                  REGISTRAR
+                </DialogTitle>
+                <DialogDescription>
+                  Registre-se ja e comece a comprar com os melhores preços do
+                  mercado.
+                </DialogDescription>
+              </DialogHeader>
+              <RegisterForm />
+            </DialogContent>
+          </Dialog>
+
+          <button className="flex items-center text-neon-red gap-1">
+            <ShoppingBag height={32} width={32} />{' '}
+            <p className="font-normal">0</p>
+          </button>
+        </div>
 
         <div className="lg:hidden flex">
           <Sheet>
@@ -63,25 +115,34 @@ export const Header = () => {
                 </SheetHeader>
               </VisuallyHidden>
               <ul className="font-bold flex flex-col items-start justify-center w-full h-full gap-4">
-                <li className="bg-neon-purple-gray-500/50 p-2 rounded-md w-full pl-5 hover:text-neon-red duration-300">
+                <li>
+                  <button className="flex items-center justify-center text-white gap-1 bg-neon-red w-full py-2 px-4 rounded-md hover:bg-neon-red/70 duration-300 max-w-max text-base">
+                    <span className="flex items-center gap-2">
+                      <ShoppingBag height={24} width={24} />{' '}
+                      <p className="font-bold">0</p> | <span>abrir</span>
+                    </span>
+                  </button>
+                </li>
+                <li className="bg-neon-purple-gray-300 p-2 rounded-md w-full pl-5 hover:text-neon-red duration-300">
                   <Link href={'/'}>todos</Link>
                 </li>
-                <li className="bg-neon-purple-gray-500/50 p-2 rounded-md w-full pl-5 hover:text-neon-red duration-300">
+                <li className="bg-neon-purple-gray-300 p-2 rounded-md w-full pl-5 hover:text-neon-red duration-300">
                   <Link href={'/'}>mouse</Link>
                 </li>
-                <li className="bg-neon-purple-gray-500/50 p-2 rounded-md w-full pl-5 hover:text-neon-red duration-300">
+                <li className="bg-neon-purple-gray-300 p-2 rounded-md w-full pl-5 hover:text-neon-red duration-300">
                   <Link href={'/'}>teclado</Link>
                 </li>
-                <li className="bg-neon-purple-gray-500/50 p-2 rounded-md w-full pl-5 hover:text-neon-red duration-300">
+                <li className="bg-neon-purple-gray-300 p-2 rounded-md w-full pl-5 hover:text-neon-red duration-300">
                   <Link href={'/'}>headset</Link>
                 </li>
                 <li className="w-full">
-                  <button className="flex items-center justify-center text-white gap-1 bg-neon-red w-full py-2 px-4 rounded-md text-xl hover:bg-neon-red/70 duration-300">
-                    <span className="flex items-center gap-2">
-                      <ShoppingBag height={24} width={24} />{' '}
-                      <p className="font-bold">0</p>
-                      | abrir carrinho <ExternalLink height={24} width={24} />
-                    </span>
+                  <button className="flex items-center justify-center text-white gap-1 bg-neon-red w-full py-2 px-4 rounded-md hover:bg-neon-red/70 duration-300 text-2xl spacin font-bebas tracking-wider">
+                    entrar
+                  </button>
+                </li>
+                <li className="w-full">
+                  <button className="flex items-center justify-center text-white gap-1 bg-neon-purple w-full py-2 px-4 rounded-md hover:bg-neon-purple/70 duration-300 text-2xl spacin font-bebas tracking-wider">
+                    registrar
                   </button>
                 </li>
               </ul>

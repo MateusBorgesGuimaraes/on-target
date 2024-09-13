@@ -82,12 +82,14 @@ export const Product = ({ product }: ProductProps) => {
         </div>
       </div>
 
-      <div className="relative z-10 before:absolute before:w-[42rem] before:h-[42rem] before:bg-neon-purple-gray-400/80 before:rounded-full lg:before:block before:hidden before:z-[-10] before:-top-40 before:left-20 before:overflow-x-hidden">
+      <div className="relative z-20 before:absolute before:w-[42rem] before:h-[42rem] before:bg-neon-purple-gray-400/80 before:rounded-full lg:before:block before:hidden before:z-[-10] before:-top-40 before:left-20 before:overflow-x-hidden">
         <ColorBallsDec
           color="neon-red"
-          className="w-[100px] h-[100px] absolute -top-36 right-0 hidden lg:block"
+          className="w-[100px] h-[100px] absolute z-[-10px] -top-4 right-0 hidden lg:block"
         />
-        <h2 className="sm:text-8xl font-bebas text-5xl">{product.name}</h2>
+        <h2 className="sm:text-8xl relative z-20 font-bebas text-5xl">
+          {product.name}
+        </h2>
         <div className="mt-7 flex flex-col gap-7">
           <div className="flex justify-between items-center ">
             <p className="text-4xl font-bebas">PREÇO</p>
