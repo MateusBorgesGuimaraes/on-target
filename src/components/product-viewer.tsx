@@ -54,7 +54,7 @@ export const ProductViewer = ({ products }: ProductViewerProps) => {
         </div>
       </div>
 
-      <div className="relative z-10 before:absolute before:w-[42rem] before:h-[42rem] before:bg-neon-purple-gray-400/80 before:rounded-full lg:before:block before:hidden before:z-[-10] before:top-1 before:left-20 before:overflow-x-hidden">
+      <div className="relative z-[8] before:absolute before:w-[42rem] before:h-[42rem] before:bg-neon-purple-gray-400/80 before:rounded-full lg:before:block before:hidden before:z-[-10] before:top-1 before:left-20 before:overflow-x-hidden">
         <h1 className="sm:text-9xl  smallest:text-8xl text-[5rem] leading-tight text-neon-purple font-bebas mb-4">
           ESPECIAIS
         </h1>

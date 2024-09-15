@@ -1,3 +1,5 @@
+'use client';
+
 import { Menu, ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -20,8 +22,12 @@ import {
 } from './ui/dialog';
 import { LoginForm } from './loginForm';
 import { RegisterForm } from './register-form';
+import { Cart } from './cart';
+import React from 'react';
 
 export const Header = () => {
+  const [openCart, setOpenCart] = React.useState(false);
+
   return (
     <header className="containerCustom relative z-20">
       <nav className="flex items-center justify-between pt-10 text-2xl ">
@@ -92,10 +98,16 @@ export const Header = () => {
             </DialogContent>
           </Dialog>
 
-          <button className="flex items-center text-neon-red gap-1">
+          <button
+            onClick={() => setOpenCart(true)}
+            className="flex items-center text-neon-red gap-1"
+          >
             <ShoppingBag height={32} width={32} />{' '}
             <p className="font-normal">0</p>
           </button>
+          {openCart && (
+            <Cart isOpen={openCart} onClose={() => setOpenCart(false)} />
+          )}
         </div>
 
         <div className="lg:hidden flex">

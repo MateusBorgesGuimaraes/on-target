@@ -9,7 +9,7 @@ export const HeroSection = () => {
           color="neon-red"
           className="absolute z-[-10px] xl:top-24 top-36 left-1/3 -translate-x-1/2 xl:w-40 xl:h-40 w-28 h-28 lg:block hidden"
         />
-        <div className="font-bebas sm:text-9xl smallest:text-8xl text-[5rem] self-center justify-self-center relative z-20">
+        <div className="font-bebas sm:text-9xl smallest:text-8xl text-[5rem] self-center justify-self-center relative z-10">
           <h1 className="leading-tight">
             <span>Qualidade,</span>
             <br />

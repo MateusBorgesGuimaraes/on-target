@@ -82,7 +82,7 @@ export const Product = ({ product }: ProductProps) => {
         </div>
       </div>
 
-      <div className="relative z-20 before:absolute before:w-[42rem] before:h-[42rem] before:bg-neon-purple-gray-400/80 before:rounded-full lg:before:block before:hidden before:z-[-10] before:-top-40 before:left-20 before:overflow-x-hidden">
+      <div className="relative z-10 before:absolute before:w-[42rem] before:h-[42rem] before:bg-neon-purple-gray-400/80 before:rounded-full lg:before:block before:hidden before:z-[-10] before:-top-40 before:left-20 before:overflow-x-hidden">
         <ColorBallsDec
           color="neon-red"
           className="w-[100px] h-[100px] absolute z-[-10px] -top-4 right-0 hidden lg:block"
