@@ -8,31 +8,33 @@ type CartItemProps = {
 
 export const CartItem = ({ bgClass }: CartItemProps) => {
   return (
-    <div className={`grid grid-cols-4 ${bgClass} p-3`}>
+    <div className={`grid grid-cols-4 ${bgClass} secondsmall:p-3 p-2`}>
       <Link href={'/'}>
         <Image
-          className="w-[90px] h-[80px] rounded-lg object-cover"
+          className="sm:w-[90px] sm:h-[80px] w-[60px] h-[53px] rounded-lg object-cover"
           src={'/assets/images/teste.jpg'}
           width={90}
           height={80}
           alt={'teste'}
         />
       </Link>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center sm:gap-3 gap-1">
         <button>
-          <PlusCircle size={20} />
+          <PlusCircle className="secondsmall:w-5 secondsmall:h-5 w-4 h-4" />
         </button>
-        <p className="text-xl">0</p>
+        <p className="sm:text-xl secondsmall:text-base text-sm font-normal">
+          0
+        </p>
         <button>
-          <MinusCircle size={20} />
+          <MinusCircle className="secondsmall:w-5 secondsmall:h-5 w-4 h-4" />
         </button>
       </div>
 
-      <div className="flex items-center text-xl">
+      <div className="flex items-center sm:text-xl secondsmall:text-base text-sm font-normal">
         <p>R$ 0,00</p>
       </div>
 
-      <div className="flex items-center text-xl">
+      <div className="flex items-center sm:text-xl secondsmall:text-base text-sm font-normal">
         <p>R$ 0,00</p>
       </div>
     </div>

@@ -128,12 +128,21 @@ export const Header = () => {
               </VisuallyHidden>
               <ul className="font-bold flex flex-col items-start justify-center w-full h-full gap-4">
                 <li>
-                  <button className="flex items-center justify-center text-white gap-1 bg-neon-red w-full py-2 px-4 rounded-md hover:bg-neon-red/70 duration-300 max-w-max text-base">
+                  <button
+                    onClick={() => setOpenCart(true)}
+                    className="flex items-center justify-center text-white gap-1 bg-neon-red w-full py-2 px-4 rounded-md hover:bg-neon-red/70 duration-300 max-w-max text-base"
+                  >
                     <span className="flex items-center gap-2">
                       <ShoppingBag height={24} width={24} />{' '}
                       <p className="font-bold">0</p> | <span>abrir</span>
                     </span>
                   </button>
+                  {openCart && (
+                    <Cart
+                      isOpen={openCart}
+                      onClose={() => setOpenCart(false)}
+                    />
+                  )}
                 </li>
                 <li className="bg-neon-purple-gray-300 p-2 rounded-md w-full pl-5 hover:text-neon-red duration-300">
                   <Link href={'/'}>todos</Link>
@@ -148,14 +157,46 @@ export const Header = () => {
                   <Link href={'/'}>headset</Link>
                 </li>
                 <li className="w-full">
-                  <button className="flex items-center justify-center text-white gap-1 bg-neon-red w-full py-2 px-4 rounded-md hover:bg-neon-red/70 duration-300 text-2xl spacin font-bebas tracking-wider">
-                    entrar
-                  </button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <button className="flex items-center justify-center text-white gap-1 bg-neon-red w-full py-2 px-4 rounded-md hover:bg-neon-red/70 duration-300 text-2xl spacin font-bebas tracking-wider">
+                        entrar
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="bg-neon-purple-gray-300 border-none">
+                      <DialogHeader>
+                        <DialogTitle className="font-bebas text-6xl text-neon-red tracking-wide">
+                          LOGIN
+                        </DialogTitle>
+                        <DialogDescription>
+                          Entre ja na sua conta e comece a comprar com os
+                          melhores preços do mercado.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <LoginForm />
+                    </DialogContent>
+                  </Dialog>
                 </li>
                 <li className="w-full">
-                  <button className="flex items-center justify-center text-white gap-1 bg-neon-purple w-full py-2 px-4 rounded-md hover:bg-neon-purple/70 duration-300 text-2xl spacin font-bebas tracking-wider">
-                    registrar
-                  </button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <button className="flex items-center justify-center text-white gap-1 bg-neon-purple w-full py-2 px-4 rounded-md hover:bg-neon-purple/70 duration-300 text-2xl spacin font-bebas tracking-wider">
+                        registrar
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="bg-neon-purple-gray-300 border-none">
+                      <DialogHeader>
+                        <DialogTitle className="font-bebas text-6xl text-neon-red tracking-wide">
+                          REGISTRAR
+                        </DialogTitle>
+                        <DialogDescription>
+                          Registre-se ja e comece a comprar com os melhores
+                          preços do mercado.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <RegisterForm />
+                    </DialogContent>
+                  </Dialog>
                 </li>
               </ul>
             </SheetContent>

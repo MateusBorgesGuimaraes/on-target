@@ -17,3 +17,15 @@ export const getRelatedProductsLink = (productId: string) => {
     url: `${URL}/api/products/${productId}/related`,
   };
 };
+
+export const loginUserByDataLink = () => {
+  return {
+    url: `${URL}/api/auth/local`,
+  };
+};
+
+export const loginUserByTokenLink = () => {
+  return {
+    url: `${URL}/api/users/me`,
+  };
+};

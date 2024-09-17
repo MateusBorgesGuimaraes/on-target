@@ -3,6 +3,7 @@ import { Source_Sans_3, Bebas_Neue } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
+import { Toaster } from '@/components/ui/toaster';
 
 const sourcesans = Source_Sans_3({
   weight: ['400', '600', '700'],
@@ -40,6 +41,7 @@ export default function RootLayout({
           <Header />
         </div>
         {children}
+        <Toaster />
         <Footer />
       </body>
     </html>

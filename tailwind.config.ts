@@ -67,6 +67,7 @@ const config: Config = {
       screens: {
         sml: '540px',
         supersmall: '480px',
+        secondsmall: '380px',
         smallest: '340px',
       },
       fontFamily: {
