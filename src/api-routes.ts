@@ -29,3 +29,9 @@ export const loginUserByTokenLink = () => {
     url: `${URL}/api/users/me`,
   };
 };
+
+export const registerUserByLink = () => {
+  return {
+    url: `${URL}/api/auth/local/register`,
+  };
+};

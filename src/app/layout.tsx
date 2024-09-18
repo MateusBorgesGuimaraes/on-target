@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   description: 'Ecommerece especializado em perifericos de informatica.',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

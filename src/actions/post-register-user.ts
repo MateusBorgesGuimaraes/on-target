@@ -1,16 +1,16 @@
 'use server';
 
-import { loginUserByDataLink } from '@/api-routes';
-import { LoginUserType } from '@/zodSchemas/login-zod';
+import { registerUserByLink } from '@/api-routes';
+import { RegisterUserType } from '@/zodSchemas/register-zod';
 import { cookies } from 'next/headers';
 
-export const postLoginUser = async (user: LoginUserType) => {
+export const postRegisterUser = async (user: RegisterUserType) => {
   const parseResponse = async (response: Response) => {
     if (!response.ok) {
       const errorText = await response.text();
       try {
         const errorJson = JSON.parse(errorText);
-        const errorMessage = errorJson?.error?.message || 'Failed to log in';
+        const errorMessage = errorJson?.error?.message || 'Failed to register';
         throw new Error(errorMessage);
       } catch (parseError) {
         throw new Error('Failed to log in');
@@ -26,7 +26,7 @@ export const postLoginUser = async (user: LoginUserType) => {
     return String(error);
   };
 
-  const { url } = loginUserByDataLink();
+  const { url } = registerUserByLink();
   try {
     const response = await fetch(url, {
       method: 'POST',

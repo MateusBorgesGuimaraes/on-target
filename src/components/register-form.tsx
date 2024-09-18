@@ -8,14 +8,33 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Input } from './formComponents/input';
 import { ErrorComponent } from './error-compononent';
+import { postRegisterUser } from '@/actions/post-register-user';
+import { useToast } from '@/hooks/use-toast';
+import { useUserStore } from '@/store/user-store';
 
 export const RegisterForm = () => {
+  const { toast } = useToast();
+  const { setUser } = useUserStore();
   const methods = useForm<RegisterUserType>({
     resolver: zodResolver(registerUserSchema),
   });
 
   async function registerUser(data: RegisterUserType) {
-    console.log('data', data);
+    const reponse = await postRegisterUser(data);
+
+    if (reponse.error) {
+      // console.log(reponse.error);
+      toast({
+        variant: 'destructive',
+        title: 'Algum erro ocorreu ao registrar.',
+        description: reponse.error,
+      });
+      return;
+    }
+
+    if (reponse.ok) {
+      setUser(reponse.data.user);
+    }
   }
 
   return (

@@ -7,8 +7,10 @@ import { loginUserSchema, LoginUserType } from '@/zodSchemas/login-zod';
 import { ErrorComponent } from './error-compononent';
 import { postLoginUser } from '@/actions/post-login-user';
 import { useToast } from '@/hooks/use-toast';
+import { useUserStore } from '@/store/user-store';
 
 export const LoginForm = () => {
+  const { setUser } = useUserStore();
   const { toast } = useToast();
   const methods = useForm<LoginUserType>({
     resolver: zodResolver(loginUserSchema),
@@ -18,16 +20,17 @@ export const LoginForm = () => {
     const reponse = await postLoginUser(data);
 
     if (reponse.error) {
-      console.log(reponse.error);
+      // console.log(reponse.error);
       toast({
         variant: 'destructive',
         title: 'Algum erro ocorreu ao tentar logar.',
         description: reponse.error,
       });
+      return;
     }
 
     if (reponse.ok) {
-      console.log(reponse.data);
+      setUser(reponse.data.user);
     }
   }
 

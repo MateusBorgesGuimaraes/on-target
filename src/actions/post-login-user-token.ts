@@ -1,10 +1,12 @@
 'use server';
 
-import { loginUserByDataLink } from '@/api-routes';
-import { LoginUserType } from '@/zodSchemas/login-zod';
+import { loginUserByTokenLink } from '@/api-routes';
+import { User } from '@/types/index';
 import { cookies } from 'next/headers';
 
-export const postLoginUser = async (user: LoginUserType) => {
+export const getLoginUserByToken = async () => {
+  const token = cookies().get('token')?.value;
+
   const parseResponse = async (response: Response) => {
     if (!response.ok) {
       const errorText = await response.text();
@@ -26,18 +28,18 @@ export const postLoginUser = async (user: LoginUserType) => {
     return String(error);
   };
 
-  const { url } = loginUserByDataLink();
+  if (!token) {
+    return { error: null, ok: false, data: null };
+  }
+  const { url } = loginUserByTokenLink();
   try {
     const response = await fetch(url, {
-      method: 'POST',
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(user),
     });
-
-    const data = await parseResponse(response);
-    cookies().set('token', data.jwt);
+    const data = (await parseResponse(response)) as User;
     return { error: null, ok: true, data };
   } catch (error) {
     return { error: handleError(error), ok: false, data: null };

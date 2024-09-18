@@ -16,7 +16,7 @@ export const ProductViewer = ({ products }: ProductViewerProps) => {
   const { changeProduct, selectedProduct, prod } = useChangeProds(products);
 
   return (
-    <div className="max-w-max flex xl:flex-row flex-col sm:gap-14 gap-6">
+    <div className="w-full flex xl:flex-row flex-col sm:gap-14 gap-6">
       <div className="flex flex-col justify-center items-center xl:block">
         <h1 className="md:text-9xl smallest:text-8xl text-[5rem] leading-tight text-neon-red font-bebas mb-4 break-all">
           RECOMENDAÇÕES

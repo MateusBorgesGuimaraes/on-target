@@ -24,9 +24,28 @@ import { LoginForm } from './loginForm';
 import { RegisterForm } from './register-form';
 import { Cart } from './cart';
 import React from 'react';
+import { useUserStore } from '@/store/user-store';
+import userLogout from '@/actions/user-logout';
+import { getLoginUserByToken } from '@/actions/post-login-user-token';
 
 export const Header = () => {
   const [openCart, setOpenCart] = React.useState(false);
+  const { user, removeUser, setUser } = useUserStore();
+
+  React.useEffect(() => {
+    const fetchUser = async () => {
+      const resposta = await getLoginUserByToken();
+      if (resposta.data && !user) {
+        setUser(resposta.data);
+      }
+    };
+    fetchUser();
+  }, [setUser, user]);
+
+  const logout = () => {
+    userLogout();
+    removeUser();
+  };
 
   return (
     <header className="containerCustom relative z-20">
@@ -58,45 +77,59 @@ export const Header = () => {
         </ul>
 
         <div className="lg:flex hidden items-center gap-4">
-          <Dialog>
-            <DialogTrigger asChild>
-              <button className="font-bebas bg-neon-purple py-1 px-4 hover:bg-neon-purple/80 duration-300 rounded-sm">
-                entrar
+          {user ? (
+            <div className="flex items-center gap-4">
+              <p className="font-bebas">Olá {user.username}</p>
+              <button
+                onClick={logout}
+                className="bg-neon-purple py-1 px-4 hover:bg-neon-purple/80 duration-300 rounded-sm font-bold text-base"
+              >
+                SAIR
               </button>
-            </DialogTrigger>
-            <DialogContent className="bg-neon-purple-gray-300 border-none">
-              <DialogHeader>
-                <DialogTitle className="font-bebas text-6xl text-neon-red tracking-wide">
-                  LOGIN
-                </DialogTitle>
-                <DialogDescription>
-                  Entre ja na sua conta e comece a comprar com os melhores
-                  preços do mercado.
-                </DialogDescription>
-              </DialogHeader>
-              <LoginForm />
-            </DialogContent>
-          </Dialog>
+            </div>
+          ) : (
+            <>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button className="font-bebas bg-neon-purple py-1 px-4 hover:bg-neon-purple/80 duration-300 rounded-sm">
+                    entrar
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="bg-neon-purple-gray-300 border-none">
+                  <DialogHeader>
+                    <DialogTitle className="font-bebas text-6xl text-neon-red tracking-wide">
+                      LOGIN
+                    </DialogTitle>
+                    <DialogDescription>
+                      Entre ja na sua conta e comece a comprar com os melhores
+                      preços do mercado.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <LoginForm />
+                </DialogContent>
+              </Dialog>
 
-          <Dialog>
-            <DialogTrigger asChild>
-              <button className="font-bebas bg-neon-red py-1 px-4 hover:bg-neon-red/80 duration-300 rounded-sm">
-                registrar
-              </button>
-            </DialogTrigger>
-            <DialogContent className="bg-neon-purple-gray-300 border-none">
-              <DialogHeader>
-                <DialogTitle className="font-bebas text-6xl text-neon-red tracking-wide">
-                  REGISTRAR
-                </DialogTitle>
-                <DialogDescription>
-                  Registre-se ja e comece a comprar com os melhores preços do
-                  mercado.
-                </DialogDescription>
-              </DialogHeader>
-              <RegisterForm />
-            </DialogContent>
-          </Dialog>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button className="font-bebas bg-neon-red py-1 px-4 hover:bg-neon-red/80 duration-300 rounded-sm">
+                    registrar
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="bg-neon-purple-gray-300 border-none">
+                  <DialogHeader>
+                    <DialogTitle className="font-bebas text-6xl text-neon-red tracking-wide">
+                      REGISTRAR
+                    </DialogTitle>
+                    <DialogDescription>
+                      Registre-se ja e comece a comprar com os melhores preços
+                      do mercado.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <RegisterForm />
+                </DialogContent>
+              </Dialog>
+            </>
+          )}
 
           <button
             onClick={() => setOpenCart(true)}
