@@ -1,8 +1,8 @@
 'use server';
 
 import { loginUserByTokenLink } from '@/api-routes';
-import { User } from '@/types/index';
 import { cookies } from 'next/headers';
+import { User } from '@/types';
 
 export const getLoginUserByToken = async () => {
   const token = cookies().get('token')?.value;
