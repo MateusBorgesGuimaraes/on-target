@@ -1,5 +1,7 @@
 import { X } from 'lucide-react';
 import { CartItem } from './cart-item';
+import { useCartStore } from '@/store/cart-store';
+import currency from '@/functions/currency';
 
 type CartProps = {
   isOpen: boolean;
@@ -7,7 +9,9 @@ type CartProps = {
 };
 
 export const Cart = ({ onClose }: CartProps) => {
-  const cartItems = [1, 2, 3, 4, 5, 6, 7];
+  // const cartItems = [1, 2, 3, 4, 5, 6, 7];
+  const { products, total } = useCartStore();
+
   return (
     <div className="fixed inset-0 z-[999] bg-black/80">
       <div className="flex flex-col bg-neon-purple-gray-500 absolute top-10  lg:left-auto lg:-translate-x-0 left-1/2 transform -translate-x-1/2 z-40 sm:w-[31.125rem] secondsmall:w-[380px] w-[300px] py-5 rounded-lg max-h-[80vh] lg:right-[10%]">
@@ -30,9 +34,11 @@ export const Cart = ({ onClose }: CartProps) => {
           className="overflow-y-auto px-5 custom-scrollbar"
           style={{ maxHeight: '50vh' }}
         >
-          {cartItems.map((item, index) => (
+          {products.map((prod, index) => (
             <CartItem
-              key={index}
+              product={prod}
+              quantity={prod.quantity}
+              key={prod.id}
               bgClass={
                 index % 2 === 0
                   ? 'bg-neon-purple-gray-400'
@@ -44,7 +50,7 @@ export const Cart = ({ onClose }: CartProps) => {
         <div className="border-t-2 border-neon-purple-gray-400">
           <div className="flex items-end justify-end px-5 secondsmall:py-5 py-4">
             <p className="sm:text-4xl text-2xl font-bebas text-neon-red tracking-wider ">
-              R$ 0,00
+              {currency(total)}
             </p>
           </div>
           <div className="flexw-full px-5">

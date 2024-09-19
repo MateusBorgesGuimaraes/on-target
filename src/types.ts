@@ -32,3 +32,10 @@ export type LatestAndFeaturedProducts = {
   latestProducts: FullProduct[];
   featuredProducts: FullProduct[];
 };
+
+export type User = {
+  id: string;
+  username: string;
+  email: string;
+  createdAt: string;
+};

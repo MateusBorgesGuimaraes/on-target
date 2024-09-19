@@ -6,8 +6,18 @@ import { CirclePlus } from 'lucide-react';
 import Link from 'next/link';
 import { Product } from '@/types';
 import currency from '@/functions/currency';
+import { useCartStore } from '@/store/cart-store';
 
 export const Card = ({ product }: { product: Product }) => {
+  const { addToCart } = useCartStore();
+
+  const handleAddToCart = () => {
+    addToCart({
+      ...product,
+      quantity: 1,
+    });
+  };
+
   return (
     <div className="relative bg-neon-purple-gray-300 p-5 rounded-2xl h-[17.8125rem] flex flex-col justify-between group overflow-hidden">
       <div className="w-full h-full group-hover:h-2/4 duration-300 ease-in-out">
@@ -38,7 +48,10 @@ export const Card = ({ product }: { product: Product }) => {
           >
             VER MAIS
           </Link>
-          <button className="py-1 bg-neon-red w-full flex items-center gap-1 justify-center hover:bg-neon-red/80 duration-300">
+          <button
+            onClick={handleAddToCart}
+            className="py-1 bg-neon-red w-full flex items-center gap-1 justify-center hover:bg-neon-red/80 duration-300"
+          >
             <CirclePlus /> ADD
           </button>
         </div>

@@ -1,4 +1,4 @@
-import { User } from '@/types/index';
+import { User } from '@/types';
 import { create } from 'zustand';
 
 type UserStore = {
