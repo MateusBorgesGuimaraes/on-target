@@ -35,3 +35,14 @@ export const registerUserByLink = () => {
     url: `${URL}/api/auth/local/register`,
   };
 };
+
+export const getCategoryProductsLink = (category: string) => {
+  if (category === 'todos') {
+    return {
+      url: `${URL}/api/products`,
+    };
+  }
+  return {
+    url: `${URL}/api/products?filters[categorie][name][$eq]=${category}`,
+  };
+};

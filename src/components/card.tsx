@@ -7,14 +7,28 @@ import Link from 'next/link';
 import { Product } from '@/types';
 import currency from '@/functions/currency';
 import { useCartStore } from '@/store/cart-store';
+import { useToast } from '@/hooks/use-toast';
+import { useUserStore } from '@/store/user-store';
 
 export const Card = ({ product }: { product: Product }) => {
   const { addToCart } = useCartStore();
+  const { user } = useUserStore();
+  const { toast } = useToast();
 
   const handleAddToCart = () => {
     addToCart({
       ...product,
       quantity: 1,
+    });
+
+    toast({
+      title: 'Product added to cart',
+    });
+  };
+
+  const handleWarning = () => {
+    toast({
+      title: 'Voce tem que estar logado para adicionar ao carrinho',
     });
   };
 
@@ -48,12 +62,22 @@ export const Card = ({ product }: { product: Product }) => {
           >
             VER MAIS
           </Link>
-          <button
-            onClick={handleAddToCart}
-            className="py-1 bg-neon-red w-full flex items-center gap-1 justify-center hover:bg-neon-red/80 duration-300"
-          >
-            <CirclePlus /> ADD
-          </button>
+
+          {user ? (
+            <button
+              onClick={handleAddToCart}
+              className="py-1 bg-neon-red w-full hover:bg-neon-red/80 duration-300 flex items-center justify-center"
+            >
+              <CirclePlus /> ADD
+            </button>
+          ) : (
+            <button
+              onClick={handleWarning}
+              className="py-1 bg-neon-red w-full flex items-center gap-1 justify-center hover:bg-neon-red/80 duration-300"
+            >
+              <CirclePlus /> ADD
+            </button>
+          )}
         </div>
       </div>
     </div>

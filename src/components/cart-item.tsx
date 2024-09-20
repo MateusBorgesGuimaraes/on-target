@@ -7,10 +7,7 @@ import { useCartStore } from '@/store/cart-store';
 
 type CartItemProps = {
   bgClass: string;
-  // image: string;
   quantity: number;
-  // price: number;
-  // id: number;
   product: Product;
 };
 

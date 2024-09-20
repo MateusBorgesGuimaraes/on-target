@@ -23,7 +23,6 @@ export const RegisterForm = () => {
     const reponse = await postRegisterUser(data);
 
     if (reponse.error) {
-      // console.log(reponse.error);
       toast({
         variant: 'destructive',
         title: 'Algum erro ocorreu ao registrar.',

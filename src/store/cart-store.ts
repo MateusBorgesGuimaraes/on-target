@@ -7,6 +7,7 @@ type CartProduct = Product & {
 
 type CartStore = {
   products: CartProduct[];
+  totalQuantity: number;
   total: number;
   addToCart: (product: CartProduct) => void;
   removeFromCart: (id: number) => void;
@@ -15,6 +16,7 @@ type CartStore = {
 
 export const useCartStore = create<CartStore>((set) => ({
   products: [],
+  totalQuantity: 0,
   total: 0,
   addToCart: (product) =>
     set((state) => {
@@ -27,11 +29,13 @@ export const useCartStore = create<CartStore>((set) => ({
               : item,
           ),
           total: state.total + product.price,
+          totalQuantity: state.totalQuantity + 1,
         };
       } else {
         return {
           products: [...state.products, { ...product, quantity: 1 }],
           total: state.total + product.price,
+          totalQuantity: state.totalQuantity + 1,
         };
       }
     }),
@@ -45,13 +49,15 @@ export const useCartStore = create<CartStore>((set) => ({
             item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
           ),
           total: state.total - product.price,
+          totalQuantity: state.totalQuantity - 1,
         };
       } else {
         return {
           products: state.products.filter((item) => item.id !== id),
           total: state.total - product.price * product.quantity,
+          totalQuantity: state.totalQuantity - product.quantity,
         };
       }
     }),
-  clearCart: () => set({ products: [], total: 0 }),
+  clearCart: () => set({ products: [], total: 0, totalQuantity: 0 }),
 }));

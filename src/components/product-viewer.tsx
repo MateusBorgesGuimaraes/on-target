@@ -7,6 +7,9 @@ import { LinkButton } from './link-button';
 import { CirclePlus } from 'lucide-react';
 import { Product } from '@/types';
 import { useChangeProds } from '@/hooks/useChangeProds';
+import { useCartStore } from '@/store/cart-store';
+import { useToast } from '@/hooks/use-toast';
+import { useUserStore } from '@/store/user-store';
 
 type ProductViewerProps = {
   products: Product[];
@@ -14,6 +17,26 @@ type ProductViewerProps = {
 
 export const ProductViewer = ({ products }: ProductViewerProps) => {
   const { changeProduct, selectedProduct, prod } = useChangeProds(products);
+  const { addToCart } = useCartStore();
+  const { user } = useUserStore();
+  const { toast } = useToast();
+
+  const handleAddToCart = () => {
+    addToCart({
+      ...prod,
+      quantity: 1,
+    });
+
+    toast({
+      title: 'Product added to cart',
+    });
+  };
+
+  const handleWarning = () => {
+    toast({
+      title: 'Voce tem que estar logado para adicionar ao carrinho',
+    });
+  };
 
   return (
     <div className="w-full flex xl:flex-row flex-col sm:gap-14 gap-6">
@@ -86,11 +109,27 @@ export const ProductViewer = ({ products }: ProductViewerProps) => {
                 VER MAIS
               </LinkButton>
 
-              <LinkButton color="purple" href={`/product/${prod.id}`}>
-                <p className="flex items-center gap-2">
-                  <CirclePlus /> ADD
-                </p>
-              </LinkButton>
+              {user ? (
+                <button
+                  onClick={handleAddToCart}
+                  color="purple"
+                  className="py-[6px] w-full text-4xl font-bebas text-white duration-300 flex items-center justify-center bg-neon-purple hover:bg-neon-purple/80"
+                >
+                  <p className="flex items-center gap-2">
+                    <CirclePlus /> ADD
+                  </p>
+                </button>
+              ) : (
+                <button
+                  onClick={handleWarning}
+                  color="purple"
+                  className="py-[6px] w-full text-4xl font-bebas text-white duration-300 flex items-center justify-center bg-neon-purple hover:bg-neon-purple/80"
+                >
+                  <p className="flex items-center gap-2">
+                    <CirclePlus /> ADD
+                  </p>
+                </button>
+              )}
             </div>
           </div>
         </div>

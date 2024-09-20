@@ -20,7 +20,6 @@ export const LoginForm = () => {
     const reponse = await postLoginUser(data);
 
     if (reponse.error) {
-      // console.log(reponse.error);
       toast({
         variant: 'destructive',
         title: 'Algum erro ocorreu ao tentar logar.',

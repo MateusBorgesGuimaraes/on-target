@@ -27,10 +27,14 @@ import React from 'react';
 import { useUserStore } from '@/store/user-store';
 import userLogout from '@/actions/user-logout';
 import { getLoginUserByToken } from '@/actions/post-login-user-token';
+import { useCartStore } from '@/store/cart-store';
+import { usePathname } from 'next/navigation';
 
 export const Header = () => {
   const [openCart, setOpenCart] = React.useState(false);
+  const { totalQuantity, clearCart } = useCartStore();
   const { user, removeUser, setUser } = useUserStore();
+  const pathname = usePathname();
 
   React.useEffect(() => {
     const fetchUser = async () => {
@@ -45,6 +49,7 @@ export const Header = () => {
   const logout = () => {
     userLogout();
     removeUser();
+    clearCart();
   };
 
   return (
@@ -62,17 +67,33 @@ export const Header = () => {
         </Link>
 
         <ul className="font-bold lg:flex items-center gap-6 absolute left-1/2 transform -translate-x-1/2 hidden">
-          <li className="hover:text-neon-purple duration-300">
-            <Link href={'/'}>todos</Link>
+          <li
+            className={`hover:text-neon-purple duration-300 ${
+              pathname === '/category/todos' ? 'text-neon-purple' : ''
+            }`}
+          >
+            <Link href={'/category/todos'}>todos</Link>
           </li>
-          <li className="hover:text-neon-purple duration-300">
-            <Link href={'/'}>mouse</Link>
+          <li
+            className={`hover:text-neon-purple duration-300 ${
+              pathname === '/category/mouse' ? 'text-neon-purple' : ''
+            }`}
+          >
+            <Link href={'/category/mouse'}>mouse</Link>
           </li>
-          <li className="hover:text-neon-purple duration-300">
-            <Link href={'/'}>teclado</Link>
+          <li
+            className={`hover:text-neon-purple duration-300 ${
+              pathname === '/category/teclado' ? 'text-neon-purple' : ''
+            }`}
+          >
+            <Link href={'/category/teclado'}>teclado</Link>
           </li>
-          <li className="hover:text-neon-purple duration-300">
-            <Link href={'/'}>headseat</Link>
+          <li
+            className={`hover:text-neon-purple duration-300 ${
+              pathname === '/category/fone' ? 'text-neon-purple' : ''
+            }`}
+          >
+            <Link href={'/category/fone'}>headset</Link>
           </li>
         </ul>
 
@@ -131,13 +152,21 @@ export const Header = () => {
             </>
           )}
 
-          <button
-            onClick={() => setOpenCart(true)}
-            className="flex items-center text-neon-red gap-1"
-          >
-            <ShoppingBag height={32} width={32} />{' '}
-            <p className="font-normal">0</p>
-          </button>
+          {user && totalQuantity > 0 ? (
+            <button
+              onClick={() => setOpenCart(true)}
+              className="flex items-center text-neon-red gap-1"
+            >
+              <ShoppingBag height={32} width={32} />{' '}
+              <p className="font-normal">{totalQuantity}</p>
+            </button>
+          ) : (
+            <div className="flex items-center text-neon-red gap-1">
+              <ShoppingBag height={32} width={32} />{' '}
+              <p className="font-normal">{totalQuantity}</p>
+            </div>
+          )}
+
           {openCart && (
             <Cart isOpen={openCart} onClose={() => setOpenCart(false)} />
           )}

@@ -1,28 +1,14 @@
-import { FullProduct, Product } from '@/types';
+import { FullProduct } from '@/types';
 import { ColorBallsDec } from '../color-ball-dec';
 import { ProductViewer } from '../product-viewer';
+import { filteredProduct } from '@/functions/filterdProduct';
 
 type RecommendationsProps = {
   featuredProducts: FullProduct[];
 };
 
 export const Recommendations = ({ featuredProducts }: RecommendationsProps) => {
-  const filteredProducts = featuredProducts.map((product): Product => {
-    const mainImageUrl =
-      product.mainImage?.large?.url ||
-      product.mainImage?.medium?.url ||
-      product.mainImage?.small?.url ||
-      product.mainImage?.thumbnail?.url ||
-      '';
-    return {
-      name: product.name,
-      price: product.price,
-      description: product.description,
-      stock: product.stock,
-      img: mainImageUrl,
-      id: product.id,
-    };
-  });
+  const filteredProducts = featuredProducts.map(filteredProduct);
 
   return (
     <section className="bg-neon-purple-gray-500 overflow-hidden overflow-x-hidden">
