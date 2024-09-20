@@ -2,12 +2,14 @@
 
 import Image from 'next/image';
 import React from 'react';
-import { LinkButton } from '../link-button';
 import { CirclePlus } from 'lucide-react';
 import currency from '@/functions/currency';
 import { ColorBallsDec } from '../color-ball-dec';
 import { useChangeImages } from '@/hooks/useChangeImages';
 import { FullProduct } from '@/types';
+import { useCartStore } from '@/store/cart-store';
+import { useUserStore } from '@/store/user-store';
+import { useToast } from '@/hooks/use-toast';
 
 type ProductProps = {
   product: FullProduct;
@@ -44,6 +46,26 @@ export const Product = ({ product }: ProductProps) => {
     },
   ];
   const { changeImage, selectedImage } = useChangeImages(images);
+  const { addToCart } = useCartStore();
+  const { user } = useUserStore();
+  const { toast } = useToast();
+
+  const handleAddToCart = () => {
+    addToCart({
+      ...product,
+      quantity: 1,
+    });
+
+    toast({
+      title: 'Product added to cart',
+    });
+  };
+
+  const handleWarning = () => {
+    toast({
+      title: 'Voce tem que estar logado para adicionar ao carrinho',
+    });
+  };
 
   return (
     <div className="flex lg:gap-32 gap-10 lg:flex-row flex-col">
@@ -111,11 +133,25 @@ export const Product = ({ product }: ProductProps) => {
           </div>
 
           <div className="flex max-w-36 ">
-            <LinkButton color="red" href={`/product/${product.id}`}>
-              <p className="flex items-center gap-2">
-                <CirclePlus /> ADD
-              </p>
-            </LinkButton>
+            {user ? (
+              <button
+                onClick={handleAddToCart}
+                className="py-[6px] w-full text-4xl font-bebas text-white duration-300 flex items-center justify-center bg-neon-red hover:bg-neon-red/80"
+              >
+                <p className="flex items-center gap-2">
+                  <CirclePlus /> ADD
+                </p>
+              </button>
+            ) : (
+              <button
+                onClick={handleWarning}
+                className="py-[6px] w-full text-4xl font-bebas text-white duration-300 flex items-center justify-center bg-neon-red hover:bg-neon-red/80"
+              >
+                <p className="flex items-center gap-2">
+                  <CirclePlus /> ADD
+                </p>
+              </button>
+            )}
           </div>
           <ColorBallsDec
             color="neon-purple"
